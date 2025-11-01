@@ -1,5 +1,5 @@
 #activate the .venv
-\Users\'your_user'\'folder_name'\.venv\Scripts\activate.bat
+\Users\'your_user'\\'folder_name'\\.venv\Scripts\activate.bat
 
 
 #Activate Dockerfile
