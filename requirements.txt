@@ -1,0 +1,14 @@
+Flask
+flask-cors
+flask-sqlalchemy
+flask-migrate
+flask-jwt-extended
+passlib[bcrypt]
+psycopg[binary]
+python-dotenv
+flask-smorest
+marshmallow
+gunicorn
+requests
+flask-bcrypt
+

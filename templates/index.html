@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Login</h1>
+    <form id="auth-form" action="{{url_for('main.login')}}" method="post">
+        <input type="email" name="email" id="email" placeholder="email">
+        <input type="text"   name="username" placeholder="username" required>
+        <input type="password" name="password" placeholder="password" required>
+
+
+        <button type="submit"
+                formaction="{{ url_for('main.login') }}"
+                formmethod="post"
+                onclick="document.getElementById('email').disabled = true;">
+        Login
+        </button>
+
+        <!-- Register (email required) -->
+        <button type="submit"
+                formaction="{{ url_for('main.register') }}"
+                formmethod="post"
+                onclick="document.getElementById('email').disabled = false;
+                        document.getElementById('email').required = true;">
+        Register
+        </button>
+
+    </form>
+</div>
+
+<script>
+    function setActionForm(action){
+        let form = document.getElementById("auth-form")
+        if (action === 'main.login') {
+            form.action = "{{url_for('main.login')}}";
+            form.method = 'post';
+            form.submit();
+        } else if (action === 'main.register'){
+            form.action = "{{url_for('main.register')}}";
+            form.method = 'post';
+            form.submit();
+        }
+    }
+</script>
+
+ {% endblock %}

@@ -1,0 +1,410 @@
+/*
+	styles.css
+	Modern, sleek login page styles — divided into named "parts" with explanatory comments
+	Use these classes in your login template: .auth-page, .auth-card, .auth-form, .form-control,
+	.btn-primary, .brand, .auth-footer
+
+	Parts:
+	1) Reset & Variables
+	2) Page layout
+	3) Auth card / visual container
+	4) Form controls (inputs, labels)
+	5) Buttons
+	6) Helper states (errors, success)
+	7) Small animations & focus
+	8) Responsive rules
+	9) Utility helpers
+*/
+
+/* ---------------- Part 1: Reset & Variables ---------------- */
+:root {
+  --bg: #0f1724; /* page background */
+  --card: #0b1220; /* card background */
+  --muted: #94a3b8; /* secondary text */
+  --text: #e6eef6; /* primary text */
+  --accent: #7c9eff; /* accent / primary button */
+  --accent-2: #6bd6c5; /* secondary accent */
+  --danger: #ff6b6b; /* errors */
+  --glass: rgba(255, 255, 255, 0.04);
+  --radius: 12px;
+  --transition: 200ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 16, 24, 1) 0%,
+    rgba(10, 12, 20, 1) 100%
+  );
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------- Part 2: Page layout ---------------- */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 3rem 1rem;
+}
+
+.auth-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: min(1100px, 96%);
+}
+
+/* left side branding area (optional) */
+.auth-hero {
+  color: var(--muted);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    180deg,
+    rgba(124, 158, 255, 0.06),
+    transparent 60%
+  );
+  backdrop-filter: blur(6px);
+}
+
+.brand {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+.brand .logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 6px 18px rgba(92, 115, 255, 0.12),
+    inset 0 -6px 14px rgba(255, 255, 255, 0.03);
+}
+.brand h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.brand p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------------- Part 3: Auth card / visual container ---------------- */
+.auth-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 2rem;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6), 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.auth-card .title {
+  font-size: 1.1rem;
+  margin: 0 0 0.35rem 0;
+}
+.auth-card .subtitle {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0 0 1.2rem 0;
+}
+
+/* small divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  margin: 1rem 0 1.25rem 0;
+  border-radius: 2px;
+}
+
+/* ---------------- Part 4: Form controls (inputs, labels) ---------------- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.form-group label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.form-control {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(0, 0, 0, 0.03)
+  );
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  color: var(--text);
+  transition: box-shadow var(--transition), border-color var(--transition),
+    transform var(--transition);
+  outline: none;
+  font-size: 0.98rem;
+}
+.form-control::placeholder {
+  color: rgba(230, 238, 246, 0.45);
+}
+.form-control:focus {
+  box-shadow: 0 6px 22px rgba(124, 158, 255, 0.07);
+  border-color: rgba(124, 158, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+.form-row {
+  display: flex;
+  gap: 0.75rem;
+}
+.form-row .form-group {
+  flex: 1;
+}
+
+/* small helper text */
+.help {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------------- Part 5: Buttons ---------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn:focus {
+  outline: 2px solid rgba(124, 158, 255, 0.12);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--accent), #5f8cff);
+  color: white;
+  box-shadow: 0 8px 24px rgba(92, 115, 255, 0.12);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 42px rgba(92, 115, 255, 0.14);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ---------------- Part 6: Helper states (errors, success) ---------------- */
+.error-text {
+  color: var(--danger);
+  font-size: 0.88rem;
+}
+.success-text {
+  color: var(--accent-2);
+  font-size: 0.88rem;
+}
+.field-error {
+  border-color: rgba(255, 107, 107, 0.9);
+  box-shadow: 0 6px 22px rgba(255, 107, 107, 0.04);
+}
+
+/* ---------------- Part 7: Small animations & focus ---------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .auth-card {
+    transition: transform 250ms cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 250ms;
+  }
+  .auth-card:hover {
+    transform: translateY(-6px);
+  }
+}
+
+/* ---------------- Part 8: Responsive rules ---------------- */
+@media (max-width: 880px) {
+  .auth-grid {
+    grid-template-columns: 1fr;
+  }
+  .auth-hero {
+    order: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.25rem;
+    border-radius: 10px;
+  }
+  .brand h1 {
+    font-size: 1rem;
+  }
+}
+
+/* ---------------- Part 9: Utility helpers ---------------- */
+.text-center {
+  text-align: center;
+}
+.muted {
+  color: var(--muted);
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+
+/* Example small footer inside auth area */
+.auth-footer {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* End of styles.css */
+
+/* Center the site header placed in base.html */
+.site-header {
+  /* match the container width & centering so the title aligns exactly above the container */
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+.site-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--text);
+  letter-spacing: 0.4px;
+}
+
+/* ---------------- Part 10: Compatibility for current templates ---------------- */
+/* The project's templates use simple selectors (.container, form#auth-form, input, button).
+	 These rules ensure the styles we added above apply to those elements without requiring
+	 changes to the template markup. */
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* when a centered site header is present, push the container slightly down
+	 so it appears directly under the header and remains horizontally centered */
+.site-header + .container {
+  /* small spacing so the container sits directly under the header */
+  margin-top: 0.6rem;
+}
+
+.container h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+/* style the plain form in index.html to match the auth-card look */
+form#auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: var(--card);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  max-width: 520px;
+}
+
+/* map plain input elements to our .form-control design */
+form#auth-form input[type="text"],
+form#auth-form input[type="email"],
+form#auth-form input[type="password"] {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(0, 0, 0, 0.03)
+  );
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+/* buttons in the template: make the first button primary and the second ghost */
+form#auth-form button {
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0;
+}
+
+/* assume the first button is login, style it as primary when adjacent to another button */
+form#auth-form button:first-of-type {
+  background: linear-gradient(90deg, var(--accent), #5f8cff);
+  color: white;
+  box-shadow: 0 8px 22px rgba(92, 115, 255, 0.12);
+}
+form#auth-form button:last-of-type {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* inline button layout on wider screens */
+@media (min-width: 520px) {
+  form#auth-form {
+    flex-direction: column;
+  }
+  .auth-action-row {
+    display: flex;
+    gap: 0.75rem;
+  }
+}
+
+/* small form helper / spacing */
+form#auth-form input:disabled {
+  opacity: 0.6;
+}
